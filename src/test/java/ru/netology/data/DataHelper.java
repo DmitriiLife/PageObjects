@@ -3,8 +3,6 @@ package ru.netology.data;
 import lombok.*;
 import ru.netology.page.DashboardPage;
 
-@Data
-@RequiredArgsConstructor
 @Value
 public class DataHelper {
 
@@ -23,7 +21,7 @@ public class DataHelper {
         private String code;
     }
 
-    public static VerificationCode getVerificationCode() {
+    public static VerificationCode getVerificationCode(AuthInfo authInfo) {
         return new VerificationCode("12345");
     }
 

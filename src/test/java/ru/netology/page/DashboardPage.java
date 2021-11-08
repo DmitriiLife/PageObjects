@@ -7,8 +7,8 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class DashboardPage {
     private ElementsCollection cards = $$(".list__item");
-    private final String balanceStart = "баланс: ";
-    private final String balanceFinish = " р.";
+    private static final String balanceStart = "баланс: ";
+    private static final String balanceFinish = " р.";
     private ElementsCollection refillButton = $$("[data-test-id='action-deposit']");
 
     public int getCardBalance(String id) {
@@ -33,6 +33,11 @@ public class DashboardPage {
 
     public TransferPage firstCardButtonClick() {
         refillButton.first().click();
+        return new TransferPage();
+    }
+
+    public TransferPage secondCardButtonClick() {
+        refillButton.last().click();
         return new TransferPage();
     }
 }
