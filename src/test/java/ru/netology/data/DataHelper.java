@@ -1,7 +1,6 @@
 package ru.netology.data;
 
 import lombok.*;
-import ru.netology.page.DashboardPage;
 
 @Value
 public class DataHelper {
@@ -28,31 +27,27 @@ public class DataHelper {
     @Value
     public static class Card {
         private String number;
-        private int balance;
-    }
 
-    public static Card getFirstCardInfo() {
-        var dashboard = new DashboardPage();
-        return new Card("5559 0000 0000 0001", dashboard.getCardBalance("01"));
-    }
+        public static Card getFirstCardInfo() {
+            return new Card("5559 0000 0000 0001");
+        }
 
-    public static Card getSecondCardInfo() {
-        var dashboard = new DashboardPage();
-        return new Card("5559 0000 0000 0002", dashboard.getCardBalance("02"));
-    }
+        public static Card getSecondCardInfo() {
+            return new Card("5559 0000 0000 0002");
+        }
 
-    public static Card getWrongCardInfo() {
-        var dashboard = new DashboardPage();
-        return new Card("5559 0000 0000 0003", 10000);
-    }
+        public static Card getWrongCardInfo() {
+            return new Card("5559 0000 0000 0003");
+        }
 
-    public static int cardBalanceAfterSendMoney(int balance, int amount) {
-        int total = balance - amount;
-        return total;
-    }
+        public static int cardBalanceAfterSendMoney(int balance, int amount) {
+            int total = balance - amount;
+            return total;
+        }
 
-    public static int cardBalanceAfterGetMoney(int balance, int amount) {
-        int total = balance + amount;
-        return total;
+        public static int cardBalanceAfterGetMoney(int balance, int amount) {
+            int total = balance + amount;
+            return total;
+        }
     }
 }

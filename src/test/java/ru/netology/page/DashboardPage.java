@@ -23,14 +23,6 @@ public class DashboardPage {
         return Integer.parseInt(value);
     }
 
-    public int getFirstCardBalance() {
-        return getCardBalance("01");
-    }
-
-    public int getSecondCardBalance() {
-        return getCardBalance("02");
-    }
-
     public TransferPage firstCardButtonClick() {
         refillButton.first().click();
         return new TransferPage();
