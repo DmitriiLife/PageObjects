@@ -74,6 +74,7 @@ public class MoneyTransferTest {
         var cardInfo = DataHelper.Card.getFirstCardInfo();
         var transferMoney = dashboard.firstCardButtonClick();
         transferMoney.transfer(cardInfo, amount);
+        transferMoney.showAlertMessage("Ошибка! Вы не можете совершить операцию по данной карте. Пожалуйста, выберите другую карту или счет зачисления!");
     }
 
     @Test
@@ -89,6 +90,7 @@ public class MoneyTransferTest {
         var cardInfo = DataHelper.Card.getSecondCardInfo();
         var transferMoney = dashboard.firstCardButtonClick();
         transferMoney.transfer(cardInfo, amount);
+        transferMoney.showAlertMessage("Успешно! Баланс карты '5559 0000 0000 0001' '100010000'");
     }
 
     @Test
@@ -104,5 +106,6 @@ public class MoneyTransferTest {
         var cardInfo = DataHelper.Card.getFirstCardInfo();
         var transferMoney = dashboard.secondCardButtonClick();
         transferMoney.transfer(cardInfo, amount);
+        transferMoney.showAlertMessage("Ошибка! Недостаточно средств на счете!");
     }
 }
