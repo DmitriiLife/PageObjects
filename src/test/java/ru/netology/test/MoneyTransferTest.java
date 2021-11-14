@@ -3,14 +3,16 @@ package ru.netology.test;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 import ru.netology.page.LoginPage;
+import ru.netology.page.VerificationPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MoneyTransferTest {
+
     @Test
     void replenishmentOfTheFirstCard() {
-        int amount = 100;
+        int amount = 100 + (int) (Math.random() * 5000);
         var authInfo = DataHelper.getAuthInfo();
         var loginPage = open("http://localhost:9999", LoginPage.class);
         var verificationPage = loginPage.validLogin(authInfo);
@@ -29,7 +31,7 @@ public class MoneyTransferTest {
 
     @Test
     void replenishmentOfTheSecondCard() {
-        int amount = 200;
+        int amount = 100 + (int) (Math.random() * 5000);
         var loginPage = open("http://localhost:9999", LoginPage.class);
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
@@ -44,21 +46,6 @@ public class MoneyTransferTest {
         var cardBalanceAfterSendSecond = DataHelper.Card.cardBalanceAfterGetMoney(cardBalanceSecond, amount);
         assertEquals(cardBalanceAfterSendFirst, dashboard.getCardBalance("01"));
         assertEquals(cardBalanceAfterSendSecond, dashboard.getCardBalance("02"));
-    }
-
-    @Test
-    void transferFromCardTwoToCardTwo() {
-        int amount = 5000;
-        var loginPage = open("http://localhost:9999", LoginPage.class);
-        var authInfo = DataHelper.getAuthInfo();
-        var verificationPage = loginPage.validLogin(authInfo);
-        var verificationCode = DataHelper.getVerificationCode(authInfo);
-        var dashboard = verificationPage.validVerify(verificationCode);
-        var cardBalanceFirst = dashboard.getCardBalance("01");
-        var cardBalanceSecond = dashboard.getCardBalance("02");
-        var cardInfo = DataHelper.Card.getSecondCardInfo();
-        var transferMoney = dashboard.secondCardButtonClick();
-        transferMoney.transfer(cardInfo, amount);
     }
 
     @Test
@@ -90,7 +77,7 @@ public class MoneyTransferTest {
         var cardInfo = DataHelper.Card.getSecondCardInfo();
         var transferMoney = dashboard.firstCardButtonClick();
         transferMoney.transfer(cardInfo, amount);
-        transferMoney.showAlertMessage("Успешно! Баланс карты '5559 0000 0000 0001' '100010000'");
+        transferMoney.showAlertMessage("Ошибка! Недостаточно средств на счете!");
     }
 
     @Test

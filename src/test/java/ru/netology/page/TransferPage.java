@@ -1,13 +1,13 @@
 package ru.netology.page;
 
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 import ru.netology.data.DataHelper;
+
+import com.codeborne.selenide.SelenideElement;
+
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class TransferPage {
@@ -18,11 +18,11 @@ public class TransferPage {
     private SelenideElement cancelButton = $("[data-test-id='action-cancel']");
     private SelenideElement errorOne = $("[data-test-id='error-notification'] .notification__content");
 
-        public void transfer(DataHelper.Card card, int amount) {
-            sumField.setValue(String.valueOf(amount));
-            fromField.setValue(card.getNumber());
-            sendButton.click();
-        }
+    public void transfer(DataHelper.Card card, int amount) {
+        sumField.setValue(String.valueOf(amount));
+        fromField.setValue(card.getNumber());
+        sendButton.click();
+    }
 
     public void showAlertMessage(String text) {
         errorOne.shouldHave(exactText(text)).shouldBe(visible, Duration.ofSeconds(4));
